@@ -22,7 +22,6 @@ charset-normalizer
 click
 colorama
 comm==0.2.2
-conda
 conda-content-trust
 conda-libmamba-solver
 conda-package-handling
@@ -204,4 +203,3 @@ Werkzeug==3.0.1
 widgetsnbextension==4.0.9
 wrapt==1.16.1
 xarray==2024.0.0
-zipp==3.17.0
