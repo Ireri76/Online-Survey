@@ -1,14 +1,33 @@
+import os
 from flask import Flask, request, render_template, flash, redirect, url_for
 from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 # Initialize the Flask app
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for flashing messages
 
+# Get the username and password from environment variables
+username = os.getenv('MONGODB_USERNAME')
+password = os.getenv('MONGODB_PASSWORD')
+database_name = os.getenv('MONGODB_DATABASE')
+
+# Construct the MongoDB URI
+uri = f"mongodb+srv://{username}:{password}@cluster0.qqbu2.mongodb.net/{database_name}?retryWrites=true&w=majority&appName=Cluster0"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
 # Initialize the MongoDB client and specify the database and collection
-client = MongoClient('mongodb://localhost:27017/')  # Connect to the MongoDB server
-db = client['BAN6420_data_db']  # Use a database called 'BAN6420_data_db'
-collection = db['BAN6420_data']  # Inside the database, use a collection called 'BAN6420_data'
+db = client[database_name]  # Use the database specified in environment variables
+collection = db['Questionnaire2024']  # Use a collection named 'Questionnaire2024'
 
 # Route to render the study overview and consent
 @app.route('/')
@@ -35,7 +54,7 @@ def collect_data():
             'entertainment': float(request.form['entertainment']) if request.form.get('entertainment') else 0,
             'school_fees': float(request.form['school_fees']) if request.form.get('school_fees') else 0,
             'shopping': float(request.form['shopping']) if request.form.get('shopping') else 0,
-            'healthcare': float(request.form['healthcare']) if request.form.get('healthcare') else 0  # Corrected line
+            'healthcare': float(request.form['healthcare']) if request.form.get('healthcare') else 0
         }
 
         # Create a dictionary of the data
