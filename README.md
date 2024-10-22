@@ -32,6 +32,9 @@ Key points for deployment:
 - Ensure that Render's IP addresses are whitelisted in MongoDB Atlas.
 - Avoid exposing sensitive credentials (e.g., passwords) by using environment variables in your Flask app while keeping them secure on Render.
 
+![image](https://github.com/user-attachments/assets/a054c7bf-508a-44b2-a896-bb0ebfcdd330)
+
+
 The deployed web application can be accessed at:  
 [https://online-survey-ouvm.onrender.com](https://online-survey-ouvm.onrender.com)
 
