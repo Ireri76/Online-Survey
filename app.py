@@ -7,13 +7,9 @@ from pymongo.server_api import ServerApi
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for flashing messages
 
-# Get the username and password from environment variables
-username = os.getenv('MONGODB_USERNAME')
-password = os.getenv('MONGODB_PASSWORD')
-database_name = os.getenv('MONGODB_DATABASE')
-
-# Construct the MongoDB URI
-uri = f"mongodb+srv://{username}:{password}@cluster0.qqbu2.mongodb.net/{database_name}?retryWrites=true&w=majority&appName=Cluster0"
+# Get the MongoDB URI and database name from environment variables
+uri = os.getenv('MONGODB_URI')
+database_name = os.getenv('MONGODB_NAME')
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -27,7 +23,7 @@ except Exception as e:
 
 # Initialize the MongoDB client and specify the database and collection
 db = client[database_name]  # Use the database specified in environment variables
-collection = db['Questionnaire2024']  # Use a collection named 'Questionnaire2024'
+collection = db['Survey 2024']  # Use a collection named 'Survey 2024'
 
 # Route to render the study overview and consent
 @app.route('/')
