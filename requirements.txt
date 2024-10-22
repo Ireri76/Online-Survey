@@ -95,7 +95,6 @@ MarkupSafe
 matplotlib==3.8.4
 matplotlib-inline==0.1.7
 mdurl==0.1.2
-menuinst
 meta==1.0.2
 mistune==3.0.2
 mkl-fft
