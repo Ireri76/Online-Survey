@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .message {
+            color: #d9534f;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Data Collection Form</h2>
+        
+        <!-- Flash messages for success or error -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="message">
+                    {% for category, message in messages %}
+                        <p class="{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Form for data collection -->
+        <form action="/collect_data" method="POST">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="utilities">Utilities:</label>
+            <input type="number" id="utilities" name="utilities" step="0.01">
+
+            <label for="entertainment">Entertainment:</label>
+            <input type="number" id="entertainment" name="entertainment" step="0.01">
+
+            <label for="school_fees">School Fees:</label>
+            <input type="number" id="school_fees" name="school_fees" step="0.01">
+
+            <label for="shopping">Shopping:</label>
+            <input type="number" id="shopping" name="shopping" step="0.01">
+
+            <label for="healthcare">Healthcare:</label>
+            <input type="number" id="healthcare" name="healthcare" step="0.01">
+
+            <label for="total_income">Total Income:</label>
+            <input type="number" id="total_income" name="total_income" step="0.01" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; Ireri Mugambi 2024
+    </footer>
+</body>
+</html>
